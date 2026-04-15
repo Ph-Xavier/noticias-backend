@@ -80,6 +80,15 @@ app.get("/", (req, res) => {
   });
 });
 
+// Endpoint para estatísticas (v1.1.0)
+app.get("/stats", (req, res) => {
+  res.json({
+    total_noticias: noticias.length,
+    categorias: [...new Set(noticias.map((n) => n.categoria))],
+    uptime: process.uptime(),
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Backend rodando na porta ${PORT}`);
   console.log(`CORS habilitado para: ${corsOptions.origin}`);
